@@ -1,19 +1,43 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Instagram, Facebook, Mail, MapPin, Phone } from 'lucide-react';
+// 1. IMPORTAR O LINK
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
     const currentYear = new Date().getFullYear();
 
+    // 2. ESTRUTURA DE LINKS COM ROTAS DEFINIDAS
     const footerLinks = [
-        { title: "Navegação", links: ["O Legado", "A Colheita", "Gastronomia", "Experiências"] },
-        { title: "Reservas", links: ["Restaurante", "Degustação Privada", "Eventos", "Boutique"] },
-        { title: "Suporte", links: ["Privacidade", "Termos de Uso", "Imprensa", "Carreiras"] }
+        {
+            title: "Navegação",
+            links: [
+                { name: "O Legado", to: "/legado" },
+                { name: "A Colheita", to: "/colecoes" },
+                { name: "Gastronomia", to: "/gastronomia" },
+                { name: "Experiências", to: "/experiencias" }
+            ]
+        },
+        {
+            title: "Reservas",
+            links: [
+                { name: "Restaurante", to: "/reserva-mesa" },
+                { name: "Degustação Privada", to: "/degustacao" }
+            ]
+        },
+        {
+            title: "Suporte",
+            links: [
+                { name: "Privacidade", to: "/privacidade" },
+                { name: "Termos de Uso", to: "/termos" },
+                { name: "Carreiras", to: "/carreiras" }
+            ]
+        }
     ];
 
     return (
         <footer className="bg-[#080808] pt-24 pb-12 px-6 md:px-20 border-t border-white/5 relative overflow-hidden">
-            {/* Detalhe Visual ao fundo (Logo gigante com opacidade mínima) */}
+            {/* Detalhe Visual ao fundo */}
             <div className="absolute -bottom-10 -right-10 pointer-events-none select-none">
                 <h2 className="text-[15vw] font-serif italic text-white/[0.02] leading-none whitespace-nowrap">
                     LA Vinícola
@@ -23,15 +47,18 @@ const Footer = () => {
             <div className="max-w-7xl mx-auto relative z-10">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8 mb-20">
 
-                    {/* Coluna 1: Branding & Newsletter */}
+                    {/* Coluna 1: Branding & Home Link */}
                     <div className="md:col-span-1 space-y-8">
                         <div>
-                            <span className="text-xl tracking-[0.6em] font-light text-white uppercase">
-                                LA Vinícola
-                            </span>
-                            <p className="text-[9px] tracking-[0.4em] uppercase text-stone-600 mt-2 italic font-light">
-                                Herança & Terroir desde 2012
-                            </p>
+                            {/* LOGO LINK PARA HOME */}
+                            <Link to="/" className="inline-block group">
+                                <span className="text-xl tracking-[0.6em] font-light text-white uppercase group-hover:text-stone-300 transition-colors">
+                                    LA Vinícola
+                                </span>
+                                <p className="text-[9px] tracking-[0.4em] uppercase text-stone-600 mt-2 italic font-light">
+                                    Herança & Terroir desde 2012
+                                </p>
+                            </Link>
                         </div>
 
                         <div className="space-y-4">
@@ -51,7 +78,7 @@ const Footer = () => {
                         </div>
                     </div>
 
-                    {/* Colunas 2, 3 e 4: Links dinâmicos */}
+                    {/* Colunas 2, 3 e 4: Links dinâmicos com Link do Router */}
                     {footerLinks.map((section) => (
                         <div key={section.title} className="space-y-6">
                             <h4 className="text-[10px] uppercase tracking-[0.5em] text-white font-medium">
@@ -59,10 +86,13 @@ const Footer = () => {
                             </h4>
                             <ul className="space-y-4">
                                 {section.links.map((link) => (
-                                    <li key={link}>
-                                        <a href="#" className="text-stone-500 text-[11px] md:text-xs uppercase tracking-widest hover:text-white transition-colors font-light">
-                                            {link}
-                                        </a>
+                                    <li key={link.name}>
+                                        <Link
+                                            to={link.to}
+                                            className="text-stone-500 text-[11px] md:text-xs uppercase tracking-widest hover:text-white transition-colors font-light"
+                                        >
+                                            {link.name}
+                                        </Link>
                                     </li>
                                 ))}
                             </ul>
@@ -70,9 +100,9 @@ const Footer = () => {
                     ))}
                 </div>
 
-                {/* Informações de Contato / Localização */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 py-10 border-t border-white/5 items-center">
-                    <div className="flex items-center gap-3 text-stone-500 text-[10px] tracking-widest uppercase font-light">
+                {/* Informações de Contato */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 py-10 border-t border-white/5 items-center text-center md:text-left">
+                    <div className="flex items-center justify-center md:justify-start gap-3 text-stone-500 text-[10px] tracking-widest uppercase font-light">
                         <MapPin size={14} strokeWidth={1} />
                         Vale dos Vinhedos, Bento Gonçalves - RS
                     </div>
@@ -83,10 +113,10 @@ const Footer = () => {
 
                     {/* Redes Sociais */}
                     <div className="flex gap-6 md:justify-end justify-center">
-                        <a href="#" className="text-stone-500 hover:text-white transition-colors">
+                        <a href="https://instagram.com" target="_blank" rel="noreferrer" className="text-stone-500 hover:text-white transition-colors">
                             <Instagram size={18} strokeWidth={1} />
                         </a>
-                        <a href="#" className="text-stone-500 hover:text-white transition-colors">
+                        <a href="https://facebook.com" target="_blank" rel="noreferrer" className="text-stone-500 hover:text-white transition-colors">
                             <Facebook size={18} strokeWidth={1} />
                         </a>
                     </div>
@@ -96,8 +126,8 @@ const Footer = () => {
                 <div className="mt-12 flex flex-col md:flex-row justify-between items-center gap-4 text-stone-700 text-[8px] md:text-[9px] uppercase tracking-[0.4em] font-light">
                     <p>© {currentYear} LA Vinícola. Todos os direitos reservados.</p>
                     <div className="flex gap-8">
-                        <span className="hover:text-stone-500 cursor-pointer">Consumo Responsável</span>
-                        <span className="hover:text-stone-500 cursor-pointer italic">Handcrafted by Luxury Design</span>
+                        <Link to="/consumo-responsavel" className="hover:text-stone-500 cursor-pointer transition-colors">Consumo Responsável</Link>
+                        <span className="italic">Handcrafted by Luxury Design</span>
                     </div>
                 </div>
             </div>

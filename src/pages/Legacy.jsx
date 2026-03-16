@@ -2,6 +2,8 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Quote, Sparkles, Heart, Zap, GraduationCap } from 'lucide-react';
 
+import vinhedos from "../assets/LegacyImages/vinhedosItalia2.jpg"
+
 const Legacy = () => {
     // Variantes para animação de entrada
     const fadeInUp = {
@@ -69,7 +71,7 @@ const Legacy = () => {
                         className="relative aspect-[4/5] border border-white/5 p-4"
                     >
                         <img
-                            src="https://images.unsplash.com/photo-1506377247377-2a5b3b0ca7df?auto=format&fit=crop&q=80"
+                            src={vinhedos}
                             className="w-full h-full object-cover grayscale opacity-60 hover:grayscale-0 transition-all duration-1000"
                             alt="Vinhedos na Itália"
                         />

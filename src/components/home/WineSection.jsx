@@ -1,5 +1,6 @@
 import React from 'react';
 import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
+// Importando as imagens específicas
 import { ruby, blueberry, violet } from "../../assets/ColectionImg/index.js";
 
 const wines = [
@@ -7,21 +8,21 @@ const wines = [
         id: 1,
         name: "Ruby 1932",
         description: "Tranquilos, médio corpo, secos e frescos.",
-        image: ruby,
+        image: blueberry,
         tag: "Clássico"
     },
     {
         id: 2,
         name: "Violet 1932",
         description: "Intenso, notas florais e final persistente.",
-        image: violet,
+        image: blueberry, // Imagem específica
         tag: "Reserva"
     },
     {
         id: 3,
         name: "Blueberry 1932",
         description: "Frutado, acidez vibrante e equilibrado.",
-        image: blueberry,
+        image: blueberry, // Imagem específica
         tag: "Premium"
     }
 ];
@@ -45,29 +46,31 @@ const WineSection = () => {
                         {wines.map((wine) => (
                             <div
                                 key={wine.id}
-                                className="min-w-[85%] md:min-w-[320px] lg:min-w-[380px] snap-center bg-[#111] border border-white/5 overflow-hidden transition-all duration-700 hover:border-white/20 group/card"
+                                className="min-w-[85%] md:min-w-[320px] lg:min-w-[380px] snap-center bg-[#111] border border-white/5 overflow-hidden transition-all duration-700 hover:border-white/20 group/card flex flex-col"
                             >
                                 {/* 
                                    CONTAINER DA IMAGEM:
-                                   Aumentamos o padding (p-12) e usamos object-contain.
-                                   Isso faz com que a garrafa fique menor e mais nítida.
+                                   - bg-gradient: cria um efeito de luz vindo de cima.
+                                   - p-10: espaço para a garrafa respirar sem ficar minúscula.
                                 */}
-                                <div className="aspect-[3/4] overflow-hidden bg-[#161616] relative flex items-center justify-center p-12">
-                                    {/* Luz de fundo sutil para destacar a garrafa menor */}
-                                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white/5 via-transparent to-transparent z-0" />
+                                <div className="aspect-[3/4] overflow-hidden bg-gradient-to-b from-[#1a1a1a] to-[#111] relative flex items-center justify-center p-10">
+                                    {/* Spotlight (Luz centralizada) */}
+                                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white/[0.07] via-transparent to-transparent z-0 pointer-events-none" />
 
                                     <img
                                         src={wine.image}
                                         alt={wine.name}
                                         /* 
-                                           object-contain: Garante que a imagem inteira apareça sem cortes ou zoom.
-                                           h-[85%]: Limita a altura para ela não encostar nas bordas.
+                                           - h-[90%]: A garrafa ocupa a maior parte da altura.
+                                           - drop-shadow: Cria profundidade se a imagem for PNG.
+                                           - object-contain: Preserva a resolução original.
                                         */
-                                        className="relative z-10 h-[85%] w-auto object-contain opacity-90 group-hover/card:opacity-100 group-hover/card:scale-105 transition-all duration-1000 ease-out shadow-2xl"
+                                        className="relative z-10 h-[90%] w-auto object-contain opacity-90 group-hover/card:opacity-100 group-hover/card:scale-[1.03] transition-all duration-1000 ease-out filter drop-shadow-[0_20px_30px_rgba(0,0,0,0.8)]"
                                     />
                                 </div>
 
-                                <div className="p-8 text-center flex flex-col items-center bg-[#0d0d0d]">
+                                {/* CONTEÚDO DO CARD */}
+                                <div className="p-8 text-center flex flex-col items-center bg-[#0d0d0d] border-t border-white/5 flex-grow">
                                     <span className="text-[9px] uppercase tracking-[0.4em] text-stone-500 mb-2 block font-light">
                                         {wine.tag}
                                     </span>
@@ -75,7 +78,7 @@ const WineSection = () => {
                                         {wine.name}
                                     </h3>
 
-                                    <div className="h-[1px] w-8 bg-stone-800 mb-5 group-hover/card:w-12 transition-all duration-500"></div>
+                                    <div className="h-[1px] w-8 bg-stone-800 mb-5 group-hover/card:w-16 transition-all duration-700"></div>
 
                                     <p className="text-stone-400 text-[11px] md:text-xs leading-relaxed font-light px-2 opacity-70 min-h-[40px] tracking-wide">
                                         {wine.description}
@@ -89,12 +92,12 @@ const WineSection = () => {
                         ))}
                     </div>
 
-                    {/* Setas de Navegação */}
-                    <button className="absolute left-[-50px] top-[45%] -translate-y-1/2 p-3 text-stone-700 hover:text-stone-200 transition-all opacity-0 group-hover:opacity-100 hidden xl:block">
-                        <ChevronLeft size={40} strokeWidth={1} />
+                    {/* Setas de Navegação (Desktop) */}
+                    <button className="absolute left-[-60px] top-[40%] -translate-y-1/2 p-3 text-stone-700 hover:text-stone-200 transition-all opacity-0 group-hover:opacity-100 hidden xl:block">
+                        <ChevronLeft size={48} strokeWidth={0.5} />
                     </button>
-                    <button className="absolute right-[-50px] top-[45%] -translate-y-1/2 p-3 text-stone-700 hover:text-stone-200 transition-all opacity-0 group-hover:opacity-100 hidden xl:block">
-                        <ChevronRight size={40} strokeWidth={1} />
+                    <button className="absolute right-[-60px] top-[40%] -translate-y-1/2 p-3 text-stone-700 hover:text-stone-200 transition-all opacity-0 group-hover:opacity-100 hidden xl:block">
+                        <ChevronRight size={48} strokeWidth={0.5} />
                     </button>
                 </div>
 

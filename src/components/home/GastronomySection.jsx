@@ -8,12 +8,14 @@ const GastronomySection = () => {
             title: "A Arte da Harmonização",
             description: "Equilibre sabores e aromas entre vinhos e alta gastronomia com a maestria de um especialista.",
             icon: <Wine strokeWidth={1} size={32} />,
+            file: "APRENDA A HARMONIZAR VINHOS E ALIMENTOS, EM APENAS 5 MINUTOS_compressed.pdf",
             label: "Guia de Harmonização"
         },
         {
             id: 2,
             title: "Segredos do Sommelier",
             description: "Aprofunde seus conhecimentos e descubra as combinações perfeitas para o seu paladar.",
+            file: "APROFUNDE SEUS CONHECIMENTOS SOBRE HARMONIZAÇÃO, EM APENAS 5 MINUTOS_compressed.pdf",
             icon: <Award strokeWidth={1} size={32} />,
             label: "Masterclass PDF"
         }
@@ -21,11 +23,9 @@ const GastronomySection = () => {
 
     return (
         <section className="bg-[#0a0a0a] py-24 px-6 md:px-12 relative overflow-hidden">
-            {/* Detalhe de luz ambiente no fundo para dar profundidade */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-stone-500/5 rounded-full blur-[120px] pointer-events-none" />
 
             <div className="max-w-6xl mx-auto relative z-10">
-                {/* Texto Reduzido e Elegante */}
                 <div className="text-center mb-20 space-y-4">
                     <span className="text-[10px] uppercase tracking-[0.8em] text-stone-500 font-light">
                         Experiência Sensorial
@@ -39,14 +39,19 @@ const GastronomySection = () => {
                     </p>
                 </div>
 
-                {/* Cards de Download */}
                 <div className="grid md:grid-cols-2 gap-8 md:gap-12">
                     {guides.map((guide) => (
-                        <div
+                        /* 
+                           Ajuste no Link: 
+                           1. O caminho aponta para /downloads/ + o nome simples do arquivo.
+                           2. O atributo 'download' força o download.
+                        */
+                        <a
                             key={guide.id}
-                            className="group relative bg-[#121212]/50 backdrop-blur-sm border border-white/5 p-10 md:p-14 text-center flex flex-col items-center gap-6 hover:bg-[#161616]/80 transition-all duration-700 cursor-pointer"
+                            href={`/downloads/${guide.file}`}
+                            download
+                            className="group relative bg-[#121212]/50 backdrop-blur-sm border border-white/5 p-10 md:p-14 text-center flex flex-col items-center gap-6 hover:bg-[#161616]/80 transition-all duration-700 cursor-pointer no-underline"
                         >
-                            {/* Ícone Minimalista Estilizado */}
                             <div className="text-stone-400 group-hover:text-stone-100 transition-colors duration-500 transform group-hover:scale-110">
                                 {guide.icon}
                             </div>
@@ -63,20 +68,18 @@ const GastronomySection = () => {
                                 </p>
                             </div>
 
-                            {/* Botão de Download Refinado */}
-                            <button className="mt-4 flex items-center gap-3 text-[10px] uppercase tracking-[0.4em] text-stone-300 group-hover:text-white transition-all">
+                            <div className="mt-4 flex items-center gap-3 text-[10px] uppercase tracking-[0.4em] text-stone-300 group-hover:text-white transition-all">
                                 <span className="w-8 h-[1px] bg-stone-700 group-hover:w-12 group-hover:bg-white transition-all" />
                                 Baixar PDF
                                 <Download size={14} strokeWidth={1} className="opacity-40 group-hover:opacity-100" />
-                            </button>
+                            </div>
 
-                            {/* Detalhe de borda que brilha no hover */}
                             <div className="absolute inset-0 border border-white/0 group-hover:border-white/10 transition-all duration-700 pointer-events-none" />
-                        </div>
+                        </a>
                     ))}
                 </div>
             </div>
-        </section>
+        </section >
     );
 };
 
